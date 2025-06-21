@@ -3,7 +3,7 @@ import asyncio
 import streamlit as st
 from dotenv import load_dotenv
 from agents import Agent, AsyncOpenAI, OpenAIChatCompletionsModel, RunConfig, Runner
-import PyPDF2
+import pypdf2
 
 # Load API Key
 load_dotenv()
