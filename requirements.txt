@@ -1,7 +1,4 @@
-streamlit
-python-dotenv
-openai
---extra-index-url https://pypi.org/simple
---trusted-host pypi.org
---trusted-host files.pythonhosted.org
-PyPDF2==3.0.1
+streamlit==1.35.0
+pypdf2==3.0.1
+python-dotenv==1.0.1
+openai==1.30.1
