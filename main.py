@@ -3,7 +3,6 @@ import asyncio
 import streamlit as st
 from dotenv import load_dotenv
 from agents import Agent, AsyncOpenAI, OpenAIChatCompletionsModel, RunConfig, Runner
-import PyPDF2
 
 # Load API Key
 load_dotenv()
@@ -70,24 +69,12 @@ if st.button("🚀 Get Answer") and question.strip():
 st.subheader("🛠️ Extra Research Tools")
 tool = st.selectbox("Choose a tool", [
     "None",
-    "📄 PDF Summarization",
     "🧠 Keyword Extraction",
     "📝 APA Reference Generator",
     "💡 Concept Explainer"
 ])
 
-if tool == "📄 PDF Summarization":
-    pdf = st.file_uploader("Upload a PDF", type=["pdf"])
-    if pdf and st.button("📘 Summarize PDF"):
-        reader = PyPDF2.PdfReader(pdf)
-        text = "".join([page.extract_text() for page in reader.pages if page.extract_text()])[:8000]
-        prompt = f"Summarize the following research paper:\n\n{text}"
-        with st.spinner("Summarizing PDF..."):
-            response = asyncio.run(Runner.run(agent, input=prompt, run_config=config))
-        st.success("✅ Summary:")
-        st.write(response.final_output)
-
-elif tool == "🧠 Keyword Extraction":
+if tool == "🧠 Keyword Extraction":
     content = st.text_area("Paste content for keyword extraction")
     if st.button("🔑 Extract Keywords") and content:
         prompt = f"Extract the most relevant keywords from this content:\n\n{content}"
