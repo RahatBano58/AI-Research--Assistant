@@ -3,7 +3,7 @@ import asyncio
 import streamlit as st
 from dotenv import load_dotenv
 from agents import Agent, AsyncOpenAI, OpenAIChatCompletionsModel, RunConfig, Runner
-import pypdf2
+import PyPDF2
 
 # Load API Key
 load_dotenv()
@@ -79,7 +79,7 @@ tool = st.selectbox("Choose a tool", [
 if tool == "📄 PDF Summarization":
     pdf = st.file_uploader("Upload a PDF", type=["pdf"])
     if pdf and st.button("📘 Summarize PDF"):
-        reader = pypdf2.PdfReader(file)
+        reader = PyPDF2.PdfReader(pdf)
         text = "".join([page.extract_text() for page in reader.pages if page.extract_text()])[:8000]
         prompt = f"Summarize the following research paper:\n\n{text}"
         with st.spinner("Summarizing PDF..."):
